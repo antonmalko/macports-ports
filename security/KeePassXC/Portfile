@@ -130,6 +130,61 @@ configure.pre_args-append \
     -DWITH_XC_YUBIKEY=ON \
     -DWITH_XC_UPDATECHECK=OFF \
     -DWITH_XC_DOCS=OFF
+    
+variant no_autotype description {Disable Auto-Type} {
+    configure.pre_args-append \
+    -DWITH_XC_AUTOTYPE=OFF
+}
+
+variant no_yubikey description {Disable YubiKey HMAC-SHA1 authentication support} {
+    configure.pre_args-delete \
+    -DWITH_XC_YUBIKEY=ON
+    
+    configure.pre_args-append \
+    -DWITH_XC_YUBIKEY=OFF
+}
+
+variant no_browser description {Disable KeePassXC-Browser extension support} {
+    configure.pre_args-delete \
+    -DWITH_XC_BROWSER=ON
+    
+    configure.pre_args-append \
+    -DWITH_XC_BROWSER=OFF
+}
+    
+variant no_networking description {Disable networking support (e.g., favicon downloading)} {
+    configure.pre_args-delete \
+    -DWITH_XC_NETWORKING=ON
+    
+    configure.pre_args-append \
+    -DWITH_XC_NETWORKING=OFF
+}
+
+variant updatecheck description {Enable automatic updating checking (implies enabled networking)} {
+    configure.pre_args-delete \
+    -DWITH_XC_NETWORKING=OFF \
+    -DWITH_XC_UPDATECHECK=OFF
+    
+    configure.pre_args-append \
+    -DWITH_XC_NETWORKING=ON \
+    -DWITH_XC_UPDATECHECK=ON
+}
+
+variant no_sshagent description {Disable SSHAgent support} {
+    configure.pre_args-delete \
+    -DWITH_XC_SSHAGENT=ON
+
+    configure.pre_args-append \
+    -DWITH_XC_SSHAGENT=OFF
+}
+
+variant no_keeshare description {Disable Keeshare group synchronization extension} {
+    configure.pre_args-delete \
+    -DWITH_XC_KEESHARE=ON
+
+    configure.pre_args-append \
+    -DWITH_XC_KEESHARE=OFF
+}
 
 # QTest::addRow was introduced in Qt 5.9
 # Don't build tests in that case
